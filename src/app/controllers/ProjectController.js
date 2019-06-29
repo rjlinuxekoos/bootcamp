@@ -1,6 +1,6 @@
 
 const projects = [];
-
+var countReq = 0;
 class ProjectController {
   store(req, res) {
     const { id, title } = req.body;
@@ -31,6 +31,9 @@ class ProjectController {
   }
   retorna_lista_check(){
     return projects;
+  }
+  soma_req(){
+    return countReq++;
   }
   delete(req, res) {
     const { id } = req.params;

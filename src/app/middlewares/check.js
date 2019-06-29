@@ -1,20 +1,13 @@
 import express from 'express';
-
+import routes from '../../routes';
 import projectController from '../controllers/ProjectController';
 
 export default async (req, res, next) => {
-  const { id } = req.params;
-  console.log('id');
-  console.log(id);
-  const project = projectController.retorna_lista_check();
-  console.log('Aqui');
-  console.log(project);
-  if (project === undefined) {
-    return next();
-  }
-  project.find(p => p.id === id);
+  const { id, title } = req.body;
 
-  if (!project) {
+  const project = await projectController.retorna_lista_check();
+  const result = project.find(p => p.id === id);
+  if (!result) {
     return res.status(400).json({ error: 'Project not found' });
   }
 
